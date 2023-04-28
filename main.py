@@ -1,13 +1,11 @@
 import numpy as np
-
 import torch
 import torch.nn as nn
-import torch.utils.data as data
 import torch.nn.functional as F
-from torch.utils.tensorboard import SummaryWriter
-
-from torchvision.datasets import FashionMNIST
+import torch.utils.data as data
 import torchvision.transforms as transforms
+from torch.utils.tensorboard import SummaryWriter
+from torchvision.datasets import FashionMNIST
 
 
 class ConvBlock(nn.Module):
@@ -67,12 +65,15 @@ class Trainer:
         ])
 
         train_dataset = FashionMNIST("./data", train=True,
-                                     transform=self.train_transform, download=True)
+                                     transform=self.train_transform,
+                                     download=True)
         val_dataset = FashionMNIST("./data", train=False,
-                                   transform=self.val_transform, download=True)
+                                   transform=self.val_transform,
+                                   download=True)
 
         batch_size = 1024
-        self.train_loader = data.DataLoader(train_dataset, batch_size=batch_size,
+        self.train_loader = data.DataLoader(train_dataset,
+                                            batch_size=batch_size,
                                             shuffle=True, num_workers=4)
         self.val_loader = data.DataLoader(val_dataset, batch_size=batch_size,
                                           shuffle=False, num_workers=4)
